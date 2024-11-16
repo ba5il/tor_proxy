@@ -1,0 +1,25 @@
+#!/bin/sh
+
+EXEDIR="$(dirname $(readlink -f "$0"))"
+ipt_rule="PREROUTING -i br0 -p tcp -m set --match-set unblock dst -j REDIRECT --to-port 9141"
+
+case "$1" in
+	start)
+		iptables -t nat -C $ipt_rule >/dev/null 2>/dev/null || (iptables -t nat -A $ipt_rule && echo "Rule added")
+		$EXEDIR/ipset_from_hosts.sh
+		;;
+	stop)
+		iptables -t nat -C $ipt_rule >/dev/null 2>/dev/null && (iptables -t nat -D $ipt_rule && echo "Rule deleted")
+		;;
+	restart)
+		iptables -t nat -C $ipt_rule >/dev/null 2>/dev/null && (iptables -t nat -D $ipt_rule && echo "Deleting rule")
+		iptables -t nat -C $ipt_rule >/dev/null 2>/dev/null || (iptables -t nat -A $ipt_rule && echo "Adding rule")
+                $EXEDIR/ipset_from_hosts.sh
+		;;
+	*)
+		echo "Use start|stop|restart options"
+		exit 1
+		;;
+esac
+
+exit 0

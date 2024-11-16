@@ -1,0 +1,13 @@
+ipset=/check.torproject.org/unblock
+ipset=/mail.proton.me/unblock
+ipset=/habrastorage.org/unblock
+ipset=/assets.habr.com/unblock
+ipset=/meandr.org/unblock
+ipset=/archlinux.org/unblock
+ipset=/file2.remont-aud.net/unblock
+ipset=/7-zip.org/unblock
+ipset=/siptv.app/unblock
+ipset=/alltransistors.com/unblock
+ipset=/farm-sock3.playme8.net/unblock
+ipset=/farm-unity.playme8.net/unblock
+ipset=/static5.playme8.net/unblock
